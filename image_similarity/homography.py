@@ -2,15 +2,24 @@ import cv2
 import math
 import numpy as np
 
-original = cv2.imread("image8.jpeg")
-image_to_compare = cv2.imread("image8_15.jpeg")
+original = cv2.imread("pcb00.jpeg")
+image_to_compare = cv2.imread("pcb00_37.jpeg")
 
 original = cv2.resize(original, (880, 580), interpolation = cv2.INTER_NEAREST)
 image_to_compare = cv2.resize(image_to_compare, (880, 580), interpolation = cv2.INTER_NEAREST)
 
-sift = cv2.xfeatures2d.SIFT_create()
+#surf = cv2.xfeatures2d.SURF_create()
+#kp, des = surf.detectAndCompute(gray_img, None)
+
+sift = cv2.xfeatures2d.SURF_create()
 kp_1, desc_1 = sift.detectAndCompute(original, None)
 kp_2, desc_2 = sift.detectAndCompute(image_to_compare, None)
+
+"""
+surf = cv2.xfeatures2d.SURF_create()
+kp_1, desc_1 = surf.detectAndCompute(original, None)
+kp_2, desc_2 = surf.detectAndCompute(image_to_compare, None)
+"""
 
 index_params = dict(algorithm=0, trees=5)
 search_params = dict()
