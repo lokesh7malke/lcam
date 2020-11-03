@@ -3,15 +3,15 @@ import time
 import numpy as np
 
 start_time = time.time()
-original = cv2.imread('003.jpeg')
+original = cv2.imread('res1temp.jpg')
 template = original.copy()
 
 hsv = cv2.cvtColor(template, cv2.COLOR_BGR2HSV)
-canny = cv2.Canny(hsv, 80, 255, 1)
+#hsv = cv2.convertScaleAbs(hsv, alpha=1.2, beta= 0)
 
+canny = cv2.Canny(hsv, 80, 255, 1)
 kernel = np.ones((7,7),np.uint8)
 dilated = cv2.dilate(canny, kernel)
-check = dilated.copy()
 
 _, contours, _ = cv2.findContours(dilated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
